@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callback Example</title>
+</head>
+<body>
+    <script>
+        // JavaScript code from the example goes here
+        function loadData(callback) {
+            console.log("Loading data from the server...");
+            setTimeout(() => {
+                const userData = { id: 1, name: "John Doe", age: 30 };
+                console.log("Data loaded successfully!");
+                callback(userData);
+            }, 2000);
+        }
+
+        function setupButton(callback) {
+            const button = document.createElement("button");
+            button.textContent = "Greet User";
+            document.body.appendChild(button);
+
+            button.addEventListener("click", () => {
+                console.log("Button clicked!");
+                callback();
+            });
+        }
+
+        function delayedMessage(callback) {
+            console.log("Waiting for 3 seconds...");
+            setTimeout(() => {
+                callback("This is a delayed message!");
+            }, 3000);
+        }
+
+        function main() {
+            loadData((data) => {
+                console.log("User Data:", data);
+
+                setupButton(() => {
+                    console.log(`Hello, ${data.name}! Welcome to the app.`);
+                });
+
+                delayedMessage((message) => {
+                    console.log(message);
+                });
+            });
+        }
+
+        main();
+    </script>
+</body>
+</html>
